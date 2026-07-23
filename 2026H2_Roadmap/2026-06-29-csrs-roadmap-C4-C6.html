@@ -1,0 +1,449 @@
+<title>CSRS 演进 Roadmap · C4–C6</title>
+<meta name="description" content="CSRS 半年演进路线图矩阵:横轴三周期(C4/C5/C6,2026.07–12)× 纵轴五条能力支柱,标注优先级/工作量/状态,含阶段性里程碑,悬停看详情与出处。">
+<style>
+  :root{
+    --ground:#F6F7F9; --panel:#FFFFFF; --ink:#1B2330; --muted:#5C6678; --faint:#8A93A3;
+    --line:#E4E7EE; --line-soft:#EEF0F5; --brand:#1E5FAD;
+    --p1:#C0881E; --p2:#2D6FB8; --p3:#13857A; --p4:#7A52C0; --p5:#C0506B;
+    --p1-t:#FBF4E6; --p2-t:#EFF5FB; --p3-t:#E9F5F3; --p4-t:#F4F0FB; --p5-t:#FBEEF1;
+    --danger:#C0392B; --hi:#D9731A;
+    --shadow:0 1px 2px rgba(27,35,48,.05), 0 4px 14px rgba(27,35,48,.06);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .wrap{
+    font-family:-apple-system,"PingFang SC","Segoe UI",system-ui,"Microsoft YaHei",sans-serif;
+    color:var(--ink);
+    background:radial-gradient(120% 80% at 0% 0%, #EEF2F8 0%, rgba(238,242,248,0) 55%),var(--ground);
+    -webkit-font-smoothing:antialiased;line-height:1.55;
+    padding:48px clamp(18px,4vw,56px) 72px;min-height:100vh;
+  }
+  .mono{font-family:"SF Mono",ui-monospace,"Menlo",monospace;font-variant-numeric:tabular-nums;}
+
+  header.mast{max-width:1420px;margin:0 auto 26px;}
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brand);font-weight:700;margin:0 0 14px;}
+  h1{font-size:clamp(27px,4vw,44px);line-height:1.08;font-weight:800;letter-spacing:-.01em;margin:0;text-wrap:balance;}
+  h1 .sub{color:var(--faint);font-weight:600;}
+  .lede{margin:16px 0 0;max-width:64ch;font-size:clamp(15px,1.4vw,16.5px);color:var(--muted);line-height:1.65;}
+  .lede b{color:var(--ink);font-weight:600;}
+  .mast-meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:20px;font-size:13px;color:var(--muted);}
+  .mast-meta span{display:inline-flex;align-items:center;gap:7px;}
+  .mast-meta .k{color:var(--faint);}
+
+  .legend{max-width:1420px;margin:0 auto 22px;display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 20px;box-shadow:var(--shadow);}
+  .lg-grp{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .lg-grp h3{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin:0;font-weight:700;}
+  .legend .hint{margin-left:auto;font-size:12px;color:var(--faint);display:inline-flex;align-items:center;gap:6px;}
+
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;line-height:1;padding:4px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:#fff;white-space:nowrap;}
+  /* priority */
+  .pr-p0{color:#fff;border-color:var(--danger);background:var(--danger);}
+  .pr-hi{color:#fff;border-color:var(--hi);background:var(--hi);}
+  .pr-mid{color:#3f5f86;border-color:#c4d4e7;background:#f1f6fb;}
+  .pr-low{color:#7a8494;border-color:#e0e4ea;background:#f6f7f9;}
+  /* effort */
+  .ef{color:#52596a;border-color:#dcdfe6;background:#fbfbfc;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:10.5px;}
+  .ef b{font-weight:700;color:#2f3542;margin-left:1px;}
+  /* status */
+  .st-prog{color:#1d6fb0;border-color:#bcd8ef;background:#f1f8fd;}
+  .st-deploy{color:#2f8f5b;border-color:#bfe3cd;background:#eef8f2;}
+  .st-spec{color:#6a4db0;border-color:#d6cbef;background:#f6f3fd;}
+  .st-partial{color:#0f7a72;border-color:#bfe2dd;background:#ecf7f5;}
+  .st-refine{color:#8a6a14;border-color:#ecdcae;background:#fbf6ea;}
+  .st-proto{color:#73787f;border-color:#cfd4dc;background:#f7f8fa;border-style:dashed;}
+
+  .matrix-scroll{max-width:1420px;margin:0 auto;overflow-x:auto;padding-bottom:6px;}
+  .matrix{display:grid;grid-template-columns:188px repeat(3,minmax(262px,1fr));gap:12px;min-width:1040px;}
+
+  .corner{display:flex;align-items:flex-end;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700;padding:0 0 10px 2px;}
+  .cyc-head{border-radius:13px;padding:15px 18px;color:#fff;position:relative;overflow:hidden;
+    background:linear-gradient(160deg,#27324a 0%,#1b2330 100%);box-shadow:var(--shadow);}
+  .cyc-head::after{content:"";position:absolute;right:-26px;top:-26px;width:104px;height:104px;border-radius:50%;background:radial-gradient(circle,rgba(46,111,184,.32),transparent 70%);}
+  .cyc-code{font-size:23px;font-weight:800;letter-spacing:.02em;}
+  .cyc-when{font-size:12px;color:#c2cad8;margin-top:2px;}
+  .cyc-when .rel{color:#8a93a3;}
+  .cyc-theme{margin-top:9px;font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:8px;line-height:1.3;}
+  .cyc-theme .tick{width:14px;height:2px;background:var(--brand);border-radius:2px;flex:none;}
+
+  .plabel{display:flex;flex-direction:column;justify-content:center;gap:3px;border-radius:12px;padding:14px 14px 14px 16px;position:relative;border:1px solid var(--line);box-shadow:var(--shadow);}
+  .plabel::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:4px;background:var(--accent);}
+  .plabel .pname{font-size:13.5px;font-weight:700;line-height:1.3;letter-spacing:-.005em;}
+  .plabel .pdesc{font-size:11px;color:var(--faint);line-height:1.4;}
+  .plabel.p1{background:var(--p1-t);--accent:var(--p1);}
+  .plabel.p2{background:var(--p2-t);--accent:var(--p2);}
+  .plabel.p3{background:var(--p3-t);--accent:var(--p3);}
+  .plabel.p4{background:var(--p4-t);--accent:var(--p4);}
+  .plabel.p5{background:var(--p5-t);--accent:var(--p5);}
+
+  .cell{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow);}
+  .cell.p1{--accent:var(--p1);} .cell.p2{--accent:var(--p2);} .cell.p3{--accent:var(--p3);}
+  .cell.p4{--accent:var(--p4);} .cell.p5{--accent:var(--p5);}
+
+  .item{display:flex;flex-direction:column;gap:7px;cursor:help;border-radius:7px;margin:-3px;padding:3px;transition:background .12s ease;outline:none;}
+  .item + .item{border-top:1px solid var(--line-soft);padding-top:10px;margin-top:0;}
+  .item[data-tip]:hover,.item[data-tip]:focus-visible{background:#f7f9fc;}
+  .item[data-tip]:focus-visible{box-shadow:0 0 0 2px rgba(30,95,173,.4);}
+  .item-h{font-size:13.5px;font-weight:700;line-height:1.32;margin:0;display:flex;align-items:center;gap:7px;}
+  .item-h .nub{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
+  .item[data-tip]:hover:not(.gate) .item-h{color:var(--accent);}
+  .item ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;}
+  .item li{font-size:12px;color:var(--muted);line-height:1.45;padding-left:12px;position:relative;}
+  .item li::before{content:"";position:absolute;left:1px;top:7px;width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:.5;}
+  .code{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--faint);}
+  .pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:1px;}
+
+  .gate-banner{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--danger);background:#fbe9e6;border:1px solid #f0c4bd;border-radius:7px;padding:5px 8px;line-height:1.35;}
+  .gate-banner .lk{font-weight:800;}
+  .item.gate .item-h{color:var(--danger);}
+  .item.gate .nub{background:var(--danger);}
+
+  .ms-label{display:flex;flex-direction:column;justify-content:center;gap:3px;border-radius:12px;padding:14px 14px 14px 16px;position:relative;color:#fff;
+    background:linear-gradient(160deg,#27324a,#1b2330);box-shadow:var(--shadow);}
+  .ms-label .pname{font-size:13.5px;font-weight:700;}
+  .ms-label .pdesc{font-size:11px;color:#aeb8c9;}
+  .ms{background:linear-gradient(180deg,#eef4fb,#fff 60%);border:1px solid #cfe0f1;border-radius:12px;padding:13px 14px;position:relative;box-shadow:var(--shadow);}
+  .ms::before{content:"";position:absolute;left:0;top:11px;bottom:11px;width:4px;border-radius:4px;background:var(--brand);}
+  .ms .ms-eb{font-size:10.5px;letter-spacing:.08em;color:var(--brand);font-weight:700;margin:0 0 8px;display:flex;align-items:center;justify-content:space-between;}
+  .ms .ms-eb .cnt{background:var(--brand);color:#fff;border-radius:999px;padding:2px 7px;font-size:10px;}
+  .ms ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .ms li{font-size:12px;color:var(--ink);line-height:1.4;padding-left:15px;position:relative;cursor:help;border-radius:5px;transition:background .12s ease;outline:none;}
+  .ms li::before{content:"";position:absolute;left:3px;top:6px;width:5px;height:5px;border-radius:1.5px;background:var(--brand);}
+  .ms li[data-tip]:hover,.ms li[data-tip]:focus-visible{background:#e4eefb;}
+  .ms li .mid{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:10px;color:var(--brand);font-weight:700;margin-right:4px;}
+
+  footer.note{max-width:1420px;margin:30px auto 0;font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:15px;line-height:1.7;}
+  footer.note b{color:var(--muted);font-weight:600;}
+
+  .floatTip{position:fixed;z-index:9999;max-width:330px;background:#1b2330;color:#eef1f6;padding:11px 13px;border-radius:9px;box-shadow:0 8px 28px rgba(27,35,48,.3);pointer-events:none;opacity:0;transition:opacity .12s ease;}
+  .floatTip .tt-title{font-weight:700;font-size:12.5px;margin-bottom:8px;color:#fff;}
+  .floatTip ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .floatTip li{font-size:12px;line-height:1.5;padding-left:13px;position:relative;color:#dfe4ec;}
+  .floatTip li::before{content:"";position:absolute;left:1px;top:7px;width:4px;height:4px;border-radius:50%;background:#7d99c4;}
+  .floatTip li.tt-src{color:#aeb8c9;font-size:11px;border-top:1px solid rgba(255,255,255,.13);padding-top:7px;margin-top:2px;}
+  .floatTip li.tt-src::before{display:none;}
+
+  .reveal{opacity:0;transform:translateY(9px);animation:rise .5s ease forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none;}.floatTip{transition:none;}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <p class="eyebrow">CSRS · 认知存储与检索系统 · 半年演进计划</p>
+    <h1>CSRS 持续演进 Roadmap <span class="sub">C4 – C6 · 2026 下半年</span></h1>
+    <p class="lede">把 CSRS 从"能用的检索系统",系统性升级为<b>知识可规范化抽取、检索与记忆更准、系统可容灾扩展、研发可自进化、能支撑企业级场景</b>的知识底座。</p>
+    <div class="mast-meta">
+      <span><span class="k">横轴</span>三个周期 <span class="mono">C4 / C5 / C6</span>,每周期 2 个月</span>
+      <span><span class="k">纵轴</span>五条能力支柱</span>
+      <span><span class="k">每项标注</span>优先级 · 工作量 · 状态</span>
+    </div>
+  </header>
+
+  <section class="legend" aria-label="图例">
+    <div class="lg-grp"><h3>优先级</h3>
+      <span class="pill pr-p0">P0 红线</span><span class="pill pr-hi">高</span><span class="pill pr-mid">中</span><span class="pill pr-low">低</span>
+    </div>
+    <div class="lg-grp"><h3>工作量</h3>
+      <span class="pill ef">工作量 <b>大</b></span><span class="pill ef">工作量 <b>中</b></span><span class="pill ef">工作量 <b>小</b></span>
+    </div>
+    <div class="lg-grp"><h3>状态</h3>
+      <span class="pill st-prog">进行中</span><span class="pill st-deploy">待部署</span><span class="pill st-spec">已设计</span><span class="pill st-partial">部分完成</span><span class="pill st-refine">待细化</span><span class="pill st-proto">探索/原型</span>
+    </div>
+    <span class="hint"><span>🖱</span>悬停看详情与出处</span>
+  </section>
+
+  <div class="matrix-scroll">
+  <div class="matrix">
+
+    <div class="corner">支柱 ╲ 周期</div>
+    <div class="cyc-head reveal"><div class="cyc-code mono">C4</div><div class="cyc-when mono">2026.07–08 <span class="rel">· 第 1–2 月</span></div><div class="cyc-theme"><span class="tick"></span>基础建设与能力增强</div></div>
+    <div class="cyc-head reveal"><div class="cyc-code mono">C5</div><div class="cyc-when mono">2026.09–10 <span class="rel">· 第 3–4 月</span></div><div class="cyc-theme"><span class="tick"></span>效果提升</div></div>
+    <div class="cyc-head reveal"><div class="cyc-code mono">C6</div><div class="cyc-when mono">2026.11–12 <span class="rel">· 第 5–6 月</span></div><div class="cyc-theme"><span class="tick"></span>高级特性应用与场景扩展</div></div>
+
+    <!-- ===== Pillar 1 ===== -->
+    <div class="plabel p1"><span class="pname">知识物料与抽取质量</span><span class="pdesc">多模态入库 · 规范化抽取</span></div>
+    <div class="cell p1">
+      <div class="item" data-title="ontology 规范化抽取 · 规则先行" data-tip="为每个租户建轻量本体(受控的实体/关系类型词表),抽取时强约束类型 + 同义实体规范化合并|先跑 D9 spike 验证存储,再建 csrs/ontology 模块|从规则层解决抽取质量,所以排在图谱抽取质量之前|出处:ontology 设计文档 + 规划需求(借 ontology 规范化知识)">
+        <h4 class="item-h"><span class="nub"></span>ontology 规范化抽取 · 规则先行</h4>
+        <ul><li>per-tenant TBox + 受控词表 + 实体规范化</li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>大</b></span><span class="pill st-spec">已设计</span></div>
+      </div>
+      <div class="item" data-title="cognify 性能与解析健壮性" data-tip="Docling/LLM/图插入耗时治理|超长页 PDF(单页可达正常页 18 倍高)解析切分 / 限 DPI / 超时|出处:CSRS Todo List #6(高) + cognify 排障笔记(超长页问题)">
+        <h4 class="item-h"><span class="nub"></span>cognify 性能与解析健壮性</h4>
+        <ul><li>Docling/LLM/图插入耗时 <span class="code">#6</span> · 超长页解析</li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>中</b></span><span class="pill st-prog">进行中</span></div>
+      </div>
+      <div class="item" data-title="cognify benchmark baseline" data-tip="沉淀当前线上真实文档作为 cognify 的 benchmark 基线|作为后续解析引擎、抽取质量、chunk 等改动的度量基准,改动好坏不靠拍脑袋|出处:CSRS Todo List #15(高) + 规划需求(明确含义)">
+        <h4 class="item-h"><span class="nub"></span>cognify benchmark baseline</h4>
+        <ul><li>沉淀线上文档为度量基线 <span class="code">#15</span></li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+    </div>
+    <div class="cell p1">
+      <div class="item" data-title="图谱抽取质量提升" data-tip="替换 gpt-4.1(稳定性不足且将淘汰)为更稳更快的抽取模型|提升 extract graph 准确率与 GraphRAG 召回|与 ontology 互换位置:先有规则约束(C4),再做模型层提质(C5)|出处:CSRS Todo List #9(高)">
+        <h4 class="item-h"><span class="nub"></span>图谱抽取质量提升</h4>
+        <ul><li>抽取模型选型替换 gpt-4.1 <span class="code">#9</span></li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>中</b></span><span class="pill st-prog">进行中</span></div>
+      </div>
+      <div class="item" data-title="VLM / LLM 多模态解析引擎" data-tip="引入 VLM / 多模态 LLM 作为解析引擎(每页渲染成图喂模型看图写 markdown)|多引擎按文档类型自动选择(图 / 表 / 扫描件),VLM 表格解析最强|出处:规划需求(LLM 作 engine + 多模态,参考百炼) + cognify eval spec + CSRS Todo List #6/#28">
+        <h4 class="item-h"><span class="nub"></span>VLM / LLM 多模态解析引擎</h4>
+        <ul><li>多引擎按类型自动选择(图/表/扫描)</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>大</b></span></div>
+      </div>
+      <div class="item" data-title="用户自助知识编辑" data-tip="让用户自行重划分 chunk、新建/修改 chunk,人工介入提升 cognify 与召回质量|覆盖了原自动 chunk 段/句边界优化(#16)的诉求——由用户手动重切实现|出处:规划需求;覆盖CSRS Todo List #16(高)">
+        <h4 class="item-h"><span class="nub"></span>用户自助知识编辑</h4>
+        <ul><li>chunk 重划分 / 增改(覆盖 <span class="code">#16</span>)</li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>大</b></span></div>
+      </div>
+      <div class="item" data-title="外部知识源接入 + URL 增量更新" data-tip="打通 Google Doc / 内部 wiki,直接 ingest 相关文档|支持文档更新:同一 URL 第二次 ingest 覆盖之前内容——该场景下 data_id 不再唯一,改用 URL 作唯一键|出处:规划需求">
+        <h4 class="item-h"><span class="nub"></span>外部知识源接入 + URL 增量更新</h4>
+        <ul><li>Google Doc / wiki 直 ingest · URL 覆盖更新</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+    </div>
+    <div class="cell p1">
+      <div class="item" data-title="图谱治理" data-tip="Entity/EntityType 做 tenant/dataset 级隔离(避免全局共享挂大量边)|Neo4j 存储优化:少存信息、提 extract 速度、降膨胀|治理 EntityType 全局超级 hub 膨胀|出处:CSRS Todo List #7(高) + #8(高);known-issues CE-050">
+        <h4 class="item-h"><span class="nub"></span>图谱治理</h4>
+        <ul><li>Entity 隔离 <span class="code">#7</span> · Neo4j 存储优化 <span class="code">#8</span> · hub 治理 <span class="code">CE-050</span></li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+      <div class="item" data-title="多模态扩展" data-tip="在图/表/扫描解析之上补齐音视频转写入库|把多模态内容图谱化、接入混合检索,让其真正可被召回|出处:规划需求(多模态含音视频)">
+        <h4 class="item-h"><span class="nub"></span>多模态扩展</h4>
+        <ul><li>音视频转写入库 · 接入混合检索</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>大</b></span></div>
+      </div>
+    </div>
+
+    <!-- ===== Pillar 2 ===== -->
+    <div class="plabel p2"><span class="pname">检索与记忆</span><span class="pdesc">召回准确度 · CE 记忆 · 隔离红线</span></div>
+    <div class="cell p2">
+      <div class="item gate" data-title="多租户隔离 + 数据正确性(前置闸)" data-tip="核心端点(assemble/compact/after_turn)仍信任请求体自报身份(SYS-02)|记忆层身份用名字符串而非 UUID(SYS-04);写入缺幂等与唯一约束(SYS-05/06);残留 SYS-03/08/10|上一版重构已修次要端点 + 删除原子性,核心端点待修|出处:CE 诊断报告 SYS 类 + known-issues CE-003 + CSRS Todo List #10/#23 + 本轮代码核验">
+        <h4 class="item-h"><span class="nub"></span>多租户隔离 + 数据正确性</h4>
+        <ul><li>身份强绑定 <span class="code">SYS-02</span> · UUID 归一 <span class="code">SYS-04</span> · 幂等 <span class="code">SYS-05/06</span></li></ul>
+        <div class="pills"><span class="pill pr-p0">P0 红线</span><span class="pill ef">工作量 <b>中</b></span><span class="pill st-partial">部分完成</span></div>
+        <div class="gate-banner"><span class="lk">⊘</span>新能力上线前置闸:红线未清不上生产</div>
+      </div>
+      <div class="item" data-title="检索准确度 · 第一波" data-tip="上线热词 / 缩写词匹配,解决专有缩写召回不准的客户痛点|(原 page-citation 召回修复已解决,移除)|出处:规划需求(热词匹配解决缩写召回)">
+        <h4 class="item-h"><span class="nub"></span>检索准确度 · 第一波</h4>
+        <ul><li>热词 / 缩写词匹配</li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+      <div class="item" data-title="多 dataset 检索全局排序" data-tip="当前跨多 dataset 检索退化为按库分别召回再拼接、无全局排序,跨库结果不可比|改为统一打分后全局排序合并|出处:CSRS Todo List #14(高);known-issues GW-002">
+        <h4 class="item-h"><span class="nub"></span>多 dataset 检索全局排序</h4>
+        <ul><li>跨库召回统一打分排序 <span class="code">#14 · GW-002</span></li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>中</b></span><span class="pill st-prog">进行中</span></div>
+      </div>
+    </div>
+    <div class="cell p2">
+      <div class="item" data-title="记忆质量修复" data-tip="assemble 消费多轮对话而非仅末句|IntentRouter scope 漏判加 memory 兜底|conflict_type supersede 落库,让旧记忆失效(避免新旧矛盾记忆同时召回)|出处:CE 诊断报告 RQL 类 9 项">
+        <h4 class="item-h"><span class="nub"></span>记忆质量修复</h4>
+        <ul><li>多轮 query / scope 兜底 / supersede 失效 <span class="code">RQL×9</span></li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>中</b></span><span class="pill st-prog">进行中</span></div>
+      </div>
+      <div class="item" data-title="检索策略 · 第二波" data-tip="粗排候选优化:为每路设 topN 保送(让高准确度 candidate 更易进精排)+ 按 query 类型动态调整各路粗排权重(现为静态配置)|动态 K 取值(与初召回 candidate 数对齐);rerank 调优|出处:CSRS Todo List #11(高) + #12(高) + #21(中)">
+        <h4 class="item-h"><span class="nub"></span>检索策略 · 第二波</h4>
+        <ul><li>粗排候选优化:topN 保送 + 动态调权 <span class="code">#11/#12</span></li><li>动态 K <span class="code">#21</span> · rerank 调优</li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+    </div>
+    <div class="cell p2">
+      <div class="item" data-title="记忆高级特性" data-tip="巩固/遗忘调度(Ebbinghaus 衰减)、合并后 Milvus/PG 一致性、时序记忆落 Neo4j、Observation 归纳合成|多数 flag 现关闭,需先修一致性(ADV-02/05)再开,否则一开就产生脏数据|出处:CE 诊断报告 ADV 类;CSRS Todo List #20/#24;规划需求(记忆高级功能)">
+        <h4 class="item-h"><span class="nub"></span>记忆高级特性</h4>
+        <ul><li>巩固/遗忘 · 合并一致性 · 时序落库 · Observation <span class="code">ADV</span></li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>大</b></span></div>
+      </div>
+      <div class="item" data-title="记忆检索性能优化" data-tip="消除单次检索重复 embed query(浪费约 600ms)|episodic 六路串行召回改为并发执行,降低 assemble 延迟|出处:CE 诊断报告 RQL-08;known-issues CE-041">
+        <h4 class="item-h"><span class="nub"></span>记忆检索性能优化</h4>
+        <ul><li>去重 embed <span class="code">CE-041</span> · episodic 改并发</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>小</b></span></div>
+      </div>
+    </div>
+
+    <!-- ===== Pillar 3 ===== -->
+    <div class="plabel p3"><span class="pname">系统健壮性与扩展</span><span class="pdesc">集群 · 性能天花板 · 容灾</span></div>
+    <div class="cell p3">
+      <div class="item" data-title="Milvus 内存 offload + 集群版" data-tip="Milvus 不自动 offload collections→随使用内存耗光,先做内存 offload 止血(紧急)|并推进集群版做容量/吞吐水平扩展|出处:CSRS Todo List #1(高,紧急) + 规划需求(Milvus 集群版)">
+        <h4 class="item-h"><span class="nub"></span>Milvus 内存 offload + 集群版</h4>
+        <ul><li>内存 offload 止血 <span class="code">#1</span> · 集群水平扩展</li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>大</b></span></div>
+      </div>
+    </div>
+    <div class="cell p3">
+      <div class="item" data-title="Neo4j 性能天花板验证" data-tip="压测量化 Neo4j 在当前与预期数据规模下的性能边界与扩展上限|定位图检索热点与高并发死锁;若瓶颈难解,调研替代图数据库|出处:CSRS Todo List #13(高) + 规划需求 + known-issues CE-044">
+        <h4 class="item-h"><span class="nub"></span>Neo4j 性能天花板验证</h4>
+        <ul><li>压测边界量化 <span class="code">#13</span> · 死锁 <span class="code">CE-044</span></li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+      <div class="item" data-title="关键节点多实例扩展" data-tip="searcher/indexer 等关键节点支持多实例水平扩展(ES/Milvus/Neo4j 多实例部署)|提升整体并发处理能力|出处:CSRS Todo List #29(低) + 规划需求(关键节点扩展)">
+        <h4 class="item-h"><span class="nub"></span>关键节点多实例扩展</h4>
+        <ul><li>searcher/indexer 水平扩展 <span class="code">#29</span></li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+    </div>
+    <div class="cell p3">
+      <div class="item" data-title="数据 / 系统容灾" data-tip="建立 PG / Neo4j / Milvus / ES 四套存储的备份与恢复机制|关键节点故障切换,保障数据不丢、服务可恢复|出处:规划需求(系统/数据容灾)">
+        <h4 class="item-h"><span class="nub"></span>数据 / 系统容灾</h4>
+        <ul><li>四存储备份恢复 · 故障切换</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>大</b></span></div>
+      </div>
+      <div class="item" data-title="高可用演练 + runbook" data-tip="做故障注入演练,验证容灾预案有效性与实际恢复时间|沉淀可执行的高可用 runbook|出处:规划需求(容灾延伸)">
+        <h4 class="item-h"><span class="nub"></span>高可用演练 + runbook</h4>
+        <ul><li>故障注入演练 · 预案沉淀</li></ul>
+        <div class="pills"><span class="pill pr-low">低</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+    </div>
+
+    <!-- ===== Pillar 4 ===== -->
+    <div class="plabel p4"><span class="pname">应用场景</span><span class="pdesc">企业知识库 · 管理系统 · AGL</span></div>
+    <div class="cell p4">
+      <div class="item" data-title="CSRS 管理系统上线" data-tip="管理系统功能已开发完成并 merge 到 master|本周期完成各站点(cn/co/com)部署接线:环境变量、ingress、IdP SP 注册、bootstrap_admin;目前仅 cn 端到端验证,co/com 待注册|出处:console 文档(部署待办) + 规划需求(管理系统)">
+        <h4 class="item-h"><span class="nub"></span>CSRS 管理系统上线</h4>
+        <ul><li>cn/co/com 部署接线 · SP 注册</li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>小</b></span><span class="pill st-deploy">待部署</span></div>
+      </div>
+      <div class="item" data-title="Slack 企业知识库生产化" data-tip="Slack 企业知识库 P0(单轮问答)与 P2(权限)已完成并 smoke 通过|生产化前补 caller token(防止知道 agent_name 就能绕过 gateway 直连),完成 7 个知识域 App 投产|出处:slack 文档(P0/P2 done,T1 待做) + 规划需求(企业知识库)">
+        <h4 class="item-h"><span class="nub"></span>Slack 企业知识库生产化</h4>
+        <ul><li>7 知识域 App 投产 · 补 caller token</li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>小</b></span><span class="pill st-deploy">待部署</span></div>
+      </div>
+    </div>
+    <div class="cell p4">
+      <div class="item" data-title="Slack 对话能力增强" data-tip="在单轮问答之上补齐多轮对话(thread 改写 + 上下文裁剪)与历史摘要|提升企业内部问答的连续性体验|出处:slack 文档(P1 多轮 / P3 摘要 阶段规划)">
+        <h4 class="item-h"><span class="nub"></span>Slack 对话能力增强</h4>
+        <ul><li>多轮对话(thread 改写)· 历史摘要</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+      <div class="item" data-title="企业知识库深化" data-tip="接入更多企业知识域,完善按域的权限与召回隔离|沉淀企业内部知识库的运营与治理能力|出处:slack 文档 + 规划需求(企业知识库)">
+        <h4 class="item-h"><span class="nub"></span>企业知识库深化</h4>
+        <ul><li>更多知识域 · 权限+召回隔离</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+    </div>
+    <div class="cell p4">
+      <div class="item" data-title="AGL 场景过程性评价" data-tip="面向 AGL 学习场景的过程性评价能力|重要,但业务细节尚未明确,本周期先占位、对齐需求,再细化设计|出处:规划需求(重要)">
+        <h4 class="item-h"><span class="nub"></span>AGL 场景过程性评价</h4>
+        <ul><li>面向学习过程的过程性评价</li></ul>
+        <div class="pills"><span class="pill pr-hi">高</span><span class="pill ef">工作量 <b>大</b></span><span class="pill st-refine">待细化</span></div>
+      </div>
+      <div class="item" data-title="企业培训助手用例" data-tip="基于 ontology 区分知识缺口与操作缺口,做技能差检测 → 智能课程推送|对应 ontology 设计文档里的企业培训助手旗舰用例,依赖 ontology 落地|出处:ontology 设计(企业培训助手用例)">
+        <h4 class="item-h"><span class="nub"></span>企业培训助手用例</h4>
+        <ul><li>知识/操作缺口检测 → 课程推送</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>大</b></span></div>
+      </div>
+    </div>
+
+    <!-- ===== Pillar 5 ===== -->
+    <div class="plabel p5"><span class="pname">研发提效与自进化</span><span class="pdesc">文档自动化 · 自动 review · 自进化</span></div>
+    <div class="cell p5">
+      <div class="item" data-title="文档维护自动化" data-tip="基于 DOC_SYSTEM_GUIDE 与 csrs-doc-refresh skill(已存在),自动校验活文档(CURRENT/ARCHITECTURE)与代码是否一致|过时即提醒或自动修订;基础已有,适合早做|出处:规划需求(文档维护自动化)">
+        <h4 class="item-h"><span class="nub"></span>文档维护自动化</h4>
+        <ul><li>活文档与代码一致性校验 · 过时提醒</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+    </div>
+    <div class="cell p5">
+      <div class="item" data-title="双 Agent 自动 code review" data-tip="两个独立 agent 互相对话完成 code review:一个提交、一个挑刺|自动发现问题并给出修改建议,减少人工 review 负担|出处:规划需求;已有 /ycui_gen_code_review_info 雏形">
+        <h4 class="item-h"><span class="nub"></span>双 Agent 自动 code review</h4>
+        <ul><li>两 agent 对话式互审 · 自动给建议</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>中</b></span></div>
+      </div>
+    </div>
+    <div class="cell p5">
+      <div class="item" data-title="代码自动巡检 + 修复" data-tip="定时巡检代码库,主动发现潜在问题(坏味道、隐患、不一致)|自动定位并尝试修复,形成持续的质量保障|出处:规划需求(自动巡检+修复)">
+        <h4 class="item-h"><span class="nub"></span>代码自动巡检 + 修复</h4>
+        <ul><li>定时巡检 · 自动定位修复</li></ul>
+        <div class="pills"><span class="pill pr-mid">中</span><span class="pill ef">工作量 <b>大</b></span></div>
+      </div>
+      <div class="item" data-title="自进化系统" data-tip="自动发现问题 → AI 自动归因 → 自动给出解决方案 的闭环系统|研发提效的终极形态,本周期先做闭环原型验证可行性|出处:规划需求(自进化系统)">
+        <h4 class="item-h"><span class="nub"></span>自进化系统</h4>
+        <ul><li>自动发现 → AI 归因 → 自动给方案</li></ul>
+        <div class="pills"><span class="pill pr-low">低</span><span class="pill ef">工作量 <b>大</b></span><span class="pill st-proto">探索/原型</span></div>
+      </div>
+    </div>
+
+    <!-- ===== Milestone row ===== -->
+    <div class="ms-label"><span class="pname">阶段性成果</span><span class="pdesc">周期末交付里程碑(悬停看达成标准)</span></div>
+    <div class="ms reveal">
+      <p class="ms-eb"><span>C4 末 · 基础建设与能力增强</span><span class="cnt">6 项结果</span></p>
+      <ul>
+        <li data-title="M4-1" data-tip="核心端点请求头身份强绑定 + 记忆层身份归一 UUID + 写入幂等全部完成|验收:body 自报身份无法越权读写;客户端重试不重复跑 pipeline"><span class="mid">M4-1</span>隔离与数据正确性红线清零,新能力可安全上生产</li>
+        <li data-title="M4-2" data-tip="内存 offload 修复(不再随使用耗尽)+ 集群版水平扩展能力到位"><span class="mid">M4-2</span>Milvus 内存不再耗尽且可水平扩展</li>
+        <li data-title="M4-3" data-tip="热词/缩写召回准 + 跨 dataset 检索有全局排序,客户检索体验明显改善"><span class="mid">M4-3</span>检索准确度提升一档(缩写召回 + 跨库排序)</li>
+        <li data-title="M4-4" data-tip="CSRS 管理系统三站点(cn/co/com)上线;Slack 7 个知识域问答投产,内部可用"><span class="mid">M4-4</span>管理系统三站点 + Slack 知识库投产可用</li>
+        <li data-title="M4-5" data-tip="ontology 抽取规则可用 + 线上文档基线建成 + 解析性能/超长页问题解决"><span class="mid">M4-5</span>cognify 地基夯实(规则 + 基线 + 性能)</li>
+        <li data-title="M4-6" data-tip="活文档与代码一致性可自动校验,过时文档自动告警,不再靠手工追"><span class="mid">M4-6</span>文档与代码一致性可自动校验告警</li>
+      </ul>
+    </div>
+    <div class="ms reveal">
+      <p class="ms-eb"><span>C5 末 · 效果提升</span><span class="cnt">7 项结果</span></p>
+      <ul>
+        <li data-title="M5-1" data-tip="RQL 9 项修复:多轮指代准、scope 不漏记忆、新旧矛盾记忆不再同时召回"><span class="mid">M5-1</span>记忆召回质量达标(指代/scope/新旧矛盾解决)</li>
+        <li data-title="M5-2" data-tip="脱离 gpt-4.1 依赖,GraphRAG 抽取准确率对 benchmark 基线可量化提升"><span class="mid">M5-2</span>图谱抽取准确率较基线可量化提升</li>
+        <li data-title="M5-3" data-tip="图/表/扫描件按文档类型自动选最优引擎(VLM/Docling/MinerU)"><span class="mid">M5-3</span>多模态解析可用,按类型自动选最优引擎</li>
+        <li data-title="M5-4" data-tip="用户可自助重切/增改 chunk,召回质量可人工干预"><span class="mid">M5-4</span>用户可自助调整 chunk,召回质量人工可控</li>
+        <li data-title="M5-5" data-tip="Google Doc / 内部 wiki 可直连入库;同一 URL 二次入库自动覆盖更新"><span class="mid">M5-5</span>Google Doc/wiki 直连入库,同 URL 自动覆盖</li>
+        <li data-title="M5-6" data-tip="粗排候选保送 + 按 query 动态权重 + rerank 调优全部生效"><span class="mid">M5-6</span>检索精度二次提升(保送+动态权重+rerank)</li>
+        <li data-title="M5-7" data-tip="Neo4j 性能边界量化、扩展或换库结论明确;双 Agent 自动 code review 投入日常"><span class="mid">M5-7</span>Neo4j 边界结论明确 + 自动 review 投入日常</li>
+      </ul>
+    </div>
+    <div class="ms reveal">
+      <p class="ms-eb"><span>C6 末 · 高级特性应用与场景扩展</span><span class="cnt">7 项结果</span></p>
+      <ul>
+        <li data-title="M6-1" data-tip="遗忘/巩固/时序/归纳上线,且 PG-Milvus-Neo4j 数据一致(先修一致性再开)"><span class="mid">M6-1</span>记忆生命周期激活且多存储数据一致</li>
+        <li data-title="M6-2" data-tip="去重 embed query + 多路并发召回生效,assemble 端到端延迟下降"><span class="mid">M6-2</span>记忆检索延迟下降</li>
+        <li data-title="M6-3" data-tip="实体按租户隔离、Neo4j 瘦身、EntityType hub 膨胀消除"><span class="mid">M6-3</span>图谱结构干净(隔离+瘦身+去 hub 膨胀)</li>
+        <li data-title="M6-4" data-tip="音视频等多模态内容图谱化并接入混合检索,可被召回"><span class="mid">M6-4</span>音视频等多模态内容可被检索召回</li>
+        <li data-title="M6-5" data-tip="四存储可备份恢复、关键节点可故障切换,有可执行的高可用 runbook"><span class="mid">M6-5</span>容灾就绪(备份恢复 + 故障切换)</li>
+        <li data-title="M6-6" data-tip="闭环原型可自动发现问题 → AI 归因 → 给出解决方案"><span class="mid">M6-6</span>自进化闭环原型跑通</li>
+        <li data-title="M6-7" data-tip="AGL 过程性评价需求落地接入;基于 ontology 的企业培训助手用例打通"><span class="mid">M6-7</span>AGL 评价落地 + 企业培训助手用例打通</li>
+      </ul>
+    </div>
+
+  </div>
+  </div>
+
+  <footer class="note">
+    <b>读图说明:</b>横轴为三个交付周期(C4/C5/C6,每周期 2 个月,2026.07–12),纵轴为五条能力支柱;每格是"该支柱在该周期要做的事",每项标注<b>优先级 · 工作量 · 状态</b>三个维度,最后一行是每周期末的阶段性里程碑。<b>悬停任意条目 / 里程碑可看详细说明、出处与达成标准。</b><br>
+    <b>优先级说明:</b><span class="pill pr-p0">P0 红线</span> 仅留给"多租户隔离+数据正确性"(安全/正确性、且是其他能力上线前置闸);<span class="pill pr-hi">高</span> 是必须重点投入的重要问题(CSRS Todo List标"高"的多在此)。带 <span class="code">#n</span> 为 CSRS Todo List 编号,<span class="code">CE-0xx / SYS-0x / GW-0xx</span> 为已立项跟踪问题。
+  </footer>
+</div>
+
+<script>
+(function(){
+  var tip=document.createElement('div');
+  tip.className='floatTip'; tip.setAttribute('role','tooltip');
+  document.body.appendChild(tip);
+  var cur=null;
+  function show(el){
+    var raw=el.getAttribute('data-tip'); if(!raw) return;
+    var title=el.getAttribute('data-title')||'';
+    var html=title?'<div class="tt-title">'+title+'</div>':'';
+    html+='<ul>';
+    raw.split('|').forEach(function(p){
+      p=p.trim(); if(!p) return;
+      var cls=p.indexOf('出处')===0?' class="tt-src"':'';
+      html+='<li'+cls+'>'+p+'</li>';
+    });
+    html+='</ul>';
+    tip.innerHTML=html; tip.style.opacity='1'; cur=el;
+  }
+  function place(x,y){
+    var w=tip.offsetWidth,h=tip.offsetHeight,vw=window.innerWidth,vh=window.innerHeight;
+    var left=x+16,top=y+16;
+    if(left+w+12>vw) left=x-w-16;
+    if(top+h+12>vh) top=y-h-16;
+    if(left<8)left=8; if(top<8)top=8;
+    tip.style.left=left+'px'; tip.style.top=top+'px';
+  }
+  function hide(){tip.style.opacity='0'; cur=null;}
+  document.querySelectorAll('[data-tip]').forEach(function(el){
+    el.setAttribute('tabindex','0');
+    el.addEventListener('mouseenter',function(e){show(el);place(e.clientX,e.clientY);});
+    el.addEventListener('mousemove',function(e){if(cur)place(e.clientX,e.clientY);});
+    el.addEventListener('mouseleave',hide);
+    el.addEventListener('focus',function(){show(el);var r=el.getBoundingClientRect();place(r.left+r.width/2,r.bottom);});
+    el.addEventListener('blur',hide);
+  });
+})();
+</script>

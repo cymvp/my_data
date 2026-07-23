@@ -1,0 +1,268 @@
+<title>O8 数据赋能 · 规划蓝图</title>
+<meta name="description" content="UMU 2026 H2 O8 数据赋能 OKR 规划图:自下而上的数据赋能分层——数据源 → 打通 → 本体/能力图谱 → 掌握度 → 学员/企业/产品赋能 → 价值出口。">
+<style>
+  :root{
+    --ground:#F6F7F9; --panel:#FFFFFF; --ink:#1B2330; --muted:#5C6678; --faint:#8A93A3;
+    --line:#E4E7EE; --line-soft:#EEF0F5; --brand:#1E5FAD;
+    --src:#6B7686;      /* 数据源 */
+    --base:#13857A;     /* 数据地基 */
+    --bone:#C0881E;     /* 结构骨架 */
+    --calc:#7A52C0;     /* 能力计算 */
+    --appC:#2D6FB8;     /* 应用 C 端 */
+    --appB:#C0506B;     /* 应用 B 端 */
+    --appP:#2f8f5b;     /* 数据产品 */
+    --val:#1E5FAD;      /* 价值出口 */
+    --shadow:0 1px 2px rgba(27,35,48,.05), 0 4px 14px rgba(27,35,48,.06);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .wrap{
+    font-family:-apple-system,"PingFang SC","Segoe UI",system-ui,"Microsoft YaHei",sans-serif;
+    color:var(--ink);
+    background:radial-gradient(120% 80% at 0% 0%, #EEF2F8 0%, rgba(238,242,248,0) 55%),var(--ground);
+    -webkit-font-smoothing:antialiased;line-height:1.55;
+    padding:46px clamp(18px,4vw,56px) 64px;min-height:100vh;
+  }
+  .mono{font-family:"SF Mono",ui-monospace,"Menlo",monospace;font-variant-numeric:tabular-nums;}
+
+  header.mast{max-width:1180px;margin:0 auto 22px;}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--brand);font-weight:700;margin:0 0 12px;}
+  h1{font-size:clamp(25px,3.6vw,40px);line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:0;text-wrap:balance;}
+  h1 .sub{color:var(--faint);font-weight:600;font-size:.6em;}
+  .obj{margin:14px 0 0;font-size:clamp(14px,1.4vw,16px);color:var(--ink);line-height:1.6;
+    background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:13px 16px;box-shadow:var(--shadow);}
+  .obj b{color:var(--brand);}
+  .mast-meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px;font-size:12.5px;color:var(--muted);}
+  .mast-meta .k{color:var(--faint);}
+
+  .stack{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:10px;position:relative;}
+
+  /* direction rail */
+  .flow-note{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--faint);margin:2px 2px 4px;}
+  .flow-note b{color:var(--muted);font-weight:600;}
+
+  .band{display:grid;grid-template-columns:128px 1fr;gap:12px;align-items:stretch;}
+  .blabel{border-radius:12px;padding:13px 12px;display:flex;flex-direction:column;justify-content:center;gap:3px;color:#fff;position:relative;box-shadow:var(--shadow);}
+  .blabel .bn{font-size:13.5px;font-weight:800;line-height:1.2;}
+  .blabel .bd{font-size:10.5px;opacity:.82;line-height:1.35;}
+  .blabel.l-val{background:linear-gradient(160deg,#27324a,#1b2330);}
+  .blabel.l-app{background:linear-gradient(160deg,#33405c,#222b3d);}
+  .blabel.l-calc{background:linear-gradient(160deg,#5b46a0,#3b2d6b);}
+  .blabel.l-bone{background:linear-gradient(160deg,#a8761a,#7c5612);}
+  .blabel.l-base{background:linear-gradient(160deg,#107a70,#0c5b54);}
+  .blabel.l-src{background:linear-gradient(160deg,#5d6776,#434b58);}
+
+  .cards{display:grid;gap:10px;}
+  .cards.c3{grid-template-columns:repeat(3,1fr);}
+  .cards.c2{grid-template-columns:repeat(2,1fr);}
+  .cards.c1{grid-template-columns:1fr;}
+
+  .kr{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px;position:relative;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:7px;}
+  .kr::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:12px 0 0 12px;background:var(--accent,#ccc);}
+  .kr.a-base{--accent:var(--base);} .kr.a-bone{--accent:var(--bone);} .kr.a-calc{--accent:var(--calc);}
+  .kr.a-appC{--accent:var(--appC);} .kr.a-appB{--accent:var(--appB);} .kr.a-appP{--accent:var(--appP);}
+  .kr-top{display:flex;align-items:center;gap:8px;}
+  .kr-badge{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 7px;flex:none;}
+  .kr-title{font-size:13.5px;font-weight:700;line-height:1.3;letter-spacing:-.005em;}
+  .kr ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:3px;}
+  .kr li{font-size:11.5px;color:var(--muted);line-height:1.42;padding-left:12px;position:relative;}
+  .kr li::before{content:"";position:absolute;left:1px;top:6px;width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:.55;}
+  .kr-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:1px;}
+  .owner{font-size:11px;color:var(--muted);display:inline-flex;align-items:center;gap:5px;}
+  .owner .av{width:16px;height:16px;border-radius:50%;background:var(--accent);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .iface{font-size:10px;font-weight:600;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,#fff);border:1px solid color-mix(in srgb,var(--accent) 28%,#fff);border-radius:999px;padding:2px 7px;white-space:nowrap;}
+
+  /* non-KR chip bands (value outlets, data sources) */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;align-content:center;}
+  .chip{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:12.5px;font-weight:600;color:var(--ink);display:flex;flex-direction:column;gap:2px;box-shadow:var(--shadow);}
+  .chip small{font-size:10.5px;font-weight:500;color:var(--faint);}
+  .chip.val{border-left:3px solid var(--val);}
+  .chip.src{border-left:3px solid var(--src);}
+  .chips.fill .chip{flex:1 1 0;min-width:150px;}
+
+  .conn{text-align:center;color:#c2c8d2;font-size:14px;line-height:1;margin:-4px 0;}
+
+  .kr{cursor:help;transition:background .12s ease;}
+  .kr:hover{background:#f7f9fc;}
+  .kr:focus-visible{outline:none;box-shadow:0 0 0 2px rgba(30,95,173,.4);}
+  .floatTip{position:fixed;z-index:9999;max-width:320px;background:#1b2330;color:#eef1f6;padding:11px 13px;border-radius:9px;box-shadow:0 8px 28px rgba(27,35,48,.3);pointer-events:none;opacity:0;transition:opacity .12s ease;}
+  .floatTip .tt-title{font-weight:700;font-size:12.5px;margin-bottom:8px;color:#fff;}
+  .floatTip ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .floatTip li{font-size:12px;line-height:1.5;padding-left:13px;position:relative;color:#dfe4ec;}
+  .floatTip li::before{content:"";position:absolute;left:1px;top:7px;width:4px;height:4px;border-radius:50%;background:#7d99c4;}
+  .floatTip li.tt-src{color:#aeb8c9;font-size:11px;padding-left:0;}
+  .floatTip li.tt-src::before{display:none;}
+  .floatTip li.tt-src.first{border-top:1px solid rgba(255,255,255,.13);padding-top:7px;margin-top:2px;}
+
+  footer.note{max-width:1180px;margin:26px auto 0;font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:14px;line-height:1.7;}
+  footer.note b{color:var(--muted);font-weight:600;}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px;}
+  .lg{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);}
+  .lg .sw{width:11px;height:11px;border-radius:3px;}
+
+  @media (max-width:780px){
+    .band{grid-template-columns:1fr;}
+    .blabel{flex-direction:row;align-items:baseline;gap:8px;}
+    .cards.c3,.cards.c2{grid-template-columns:1fr;}
+  }
+  .reveal{opacity:0;transform:translateY(8px);animation:rise .5s ease forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none;}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <p class="eyebrow">UMU 2026 H2 · OKR O8 · 能力层</p>
+    <h1>O8 数据赋能规划蓝图 <span class="sub">Data Context & Enablement</span></h1>
+    <div class="obj">
+      <b>Objective</b>　构建统一的、可被 AI 消费的企业数据(内、外部)上下文,并以此数据为底座,为<b>学员成长、客户人才决策与 UMU 内部提效</b>进行赋能。
+    </div>
+    <div class="mast-meta">
+      <span><span class="k">结构</span>自下而上的数据赋能分层 · 7 个 KR</span>
+      <span><span class="k">读法</span>越往上越接近价值,自下而上也是建设/依赖顺序</span>
+    </div>
+  </header>
+
+  <div class="stack">
+    <div class="flow-note"><b>▲ 价值</b><span>数据 → 结构 → 计算 → 应用 → 价值</span><b>数据 ▼</b></div>
+
+    <!-- 价值出口 -->
+    <div class="band reveal">
+      <div class="blabel l-val"><span class="bn">价值出口</span><span class="bd">最终为谁创造价值</span></div>
+      <div class="chips fill">
+        <div class="chip val">学员成长<small>掌握度 · 能力画像 · 个性化推荐</small></div>
+        <div class="chip val">客户人才决策<small>人才梯队 · 培训着重点 · 行业对标</small></div>
+        <div class="chip val">UMU 内部提效<small>销售 / 客成 / 产研 工作流贯通</small></div>
+      </div>
+    </div>
+    <div class="conn">▲</div>
+
+    <!-- 赋能应用层 -->
+    <div class="band reveal">
+      <div class="blabel l-app"><span class="bn">赋能应用层</span><span class="bd">把数据变成产品</span></div>
+      <div class="cards c3">
+        <div class="kr a-appC" data-title="KR5 · 学员画像 · 风险预警 + 推荐(C 端)" data-tip="个人能力画像:投影到能力图谱,输出优劣势 + 加强方向|风险预警:基于练习频率、掌握度趋势,提前预测掉队/达标风险,提示讲师介入|个性化推荐:基于能力与风险推课|度量:画像上线;能力评估分数;推荐采纳率 >70%|负责人:Jiyong Wang(供 O3 Prove 呈现)">
+          <div class="kr-top"><span class="kr-badge">KR5</span><span class="kr-title">学员画像 · 风险预警 + 推荐(C 端)</span></div>
+          <ul><li>个人能力画像上线(优劣势 + 加强方向)</li><li>能力评估分数 + 掉队/达标风险预警(练习频率、掌握度趋势)</li><li>基于能力与风险的推荐,采纳率 &gt;70%</li></ul>
+          <div class="kr-foot"><span class="owner"><span class="av">J</span>Jiyong Wang</span><span class="iface">↗ 供 O3 Prove</span></div>
+        </div>
+        <div class="kr a-appB" data-title="KR6 · 企业人才画像 + 对标(B 端)" data-tip="企业人才梯队画像 dashboard:技能分布、能力缺口、培训着重点、达标风险视图|行业对标:跨客户匿名聚合的基准/分位/标杆(如签单率、人均出保次)|度量:≥1 类行业对标数据;人才梯队 dashboard 上线|负责人:Jiyong Wang(供 O2 增长消费)">
+          <div class="kr-top"><span class="kr-badge">KR6</span><span class="kr-title">企业人才画像 + 对标(B 端)</span></div>
+          <ul><li>≥1 类行业的行业基准(对标)数据</li><li>企业人才梯队画像 dashboard 上线(含能力达标风险视图)</li></ul>
+          <div class="kr-foot"><span class="owner"><span class="av">J</span>Jiyong Wang</span><span class="iface">↗ 供 O2 增长</span></div>
+        </div>
+        <div class="kr a-appP" data-title="KR7 · 数据分析产品输出" data-tip="把练习/学习结果结构化呈现 + AI 智能总结评定|面向企业与学员的 dashboard / API 产品化输出|度量:Reporting 覆盖所需 AI 应用产品|负责人:Tingting Chen">
+          <div class="kr-top"><span class="kr-badge">KR7</span><span class="kr-title">数据分析产品输出</span></div>
+          <ul><li>Reporting 覆盖所需 AI 应用产品</li><li>练习/学习结果 AI 智能总结评定(dashboard/API)</li></ul>
+          <div class="kr-foot"><span class="owner"><span class="av">T</span>Tingting Chen</span><span class="iface">企业 + 学员</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="conn">▲</div>
+
+    <!-- 能力计算层 -->
+    <div class="band reveal">
+      <div class="blabel l-calc"><span class="bn">能力计算层</span><span class="bd">算出"学会了没"</span></div>
+      <div class="cards c1">
+        <div class="kr a-calc" data-title="KR4 · 掌握度模型" data-tip="基于能力图谱,融合课后考试 + 学习过程问题 + 对话练习表现等多源信号|输出可解释的掌握度(到底学会没、弱在哪)|度量:掌握度评价准确率 >90%(对人工标注)|负责人:Zhihua Du(输入数据含 O7 记忆)">
+          <div class="kr-top"><span class="kr-badge">KR4</span><span class="kr-title">掌握度模型</span></div>
+          <ul><li>基于能力图谱,融合课后考试 + 学习过程问题 + 对话练习表现等多源信号,输出可解释掌握度</li><li>掌握度评价准确率(人工标注对比)&gt;90%</li></ul>
+          <div class="kr-foot"><span class="owner"><span class="av">Z</span>Zhihua Du</span><span class="iface">输入数据含 O7 记忆</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="conn">▲</div>
+
+    <!-- 结构骨架层 -->
+    <div class="band reveal">
+      <div class="blabel l-bone"><span class="bn">结构骨架层</span><span class="bd">给数据一张地图</span></div>
+      <div class="cards c1">
+        <div class="kr a-bone" data-title="KR3 · 行业本体模型 + 能力图谱" data-tip="定义行业本体:实体/关系/知识点/能力/学习路径(如药企、保险)|沉淀能力图谱:能力、知识点、课程连成的共用地图|本体作为规范驱动 CSRS graph extract 抽取|度量:≥2 领域本体;能力图谱覆盖 90% 知识点;抽取合规率 100%|负责人:Yang Cui(与 O7 CSRS 协同)">
+          <div class="kr-top"><span class="kr-badge">KR3</span><span class="kr-title">行业本体模型 + 能力图谱</span></div>
+          <ul><li>完成 ≥2 个领域的本体模型(实体/关系/知识点/能力/学习路径)</li><li>能力图谱覆盖 ≥2 领域/企业,覆盖 90% 知识点</li><li>本体驱动 CSRS 规范化抽取,抽取合规率 100%</li></ul>
+          <div class="kr-foot"><span class="owner"><span class="av">Y</span>Yang Cui</span><span class="iface">↔ 与 O7 CSRS 协同</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="conn">▲</div>
+
+    <!-- 数据地基层 -->
+    <div class="band reveal">
+      <div class="blabel l-base"><span class="bn">数据地基层</span><span class="bd">打通 + 统一身份</span></div>
+      <div class="cards c2">
+        <div class="kr a-base" data-title="KR1 · 统一学习数据集市" data-tip="打通 chatbot/roleplay/manasim/AGL/学习平台的行为与结果数据|统一学员/员工身份:同一人在不同产品里认成同一个 ID|建成可被 AI 消费的统一事件流 + 指标层|度量:产品数据源 ≥2 类;身份对齐准确率 >90%;统一 schema 上线|负责人:Yuanjie Gou">
+          <div class="kr-top"><span class="kr-badge">KR1</span><span class="kr-title">统一学习数据集市</span></div>
+          <ul><li>接入产品数据源 ≥2 类(行为 + 结果)</li><li>有效身份对齐准确率 &gt;90%</li><li>统一的可被 AI 消费的数据 schema 上线</li></ul>
+          <div class="kr-foot"><span class="owner"><span class="av">Y</span>Yuanjie Gou</span></div>
+        </div>
+        <div class="kr a-base" data-title="KR2 · 企业内部系统打通" data-tip="打通 Slack / Wiki / Salesforce / Google Doc 内部系统|让内部 AI 获取内部数据上下文,贯通销售/客成/产研工作流|度量:内部数据源 ≥3 类;可被内部 Agent 消费 >3 类|负责人:Yang Cui">
+          <div class="kr-top"><span class="kr-badge">KR2</span><span class="kr-title">企业内部系统打通</span></div>
+          <ul><li>接入内部数据源 ≥3 类(Slack/Wiki/SFDC/GDoc)</li><li>数据可被内部 Agent 消费 &gt;3 类</li></ul>
+          <div class="kr-foot"><span class="owner"><span class="av">Y</span>Yang Cui</span><span class="iface">企业内部提效</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="conn">▲</div>
+
+    <!-- 数据源 -->
+    <div class="band reveal">
+      <div class="blabel l-src"><span class="bn">数据源</span><span class="bd">数据从哪来</span></div>
+      <div class="chips">
+        <div class="chip src">AI 产品<small>chatbot · roleplay · ManaSim · AGL · 学习平台</small></div>
+        <div class="chip src">企业内部系统<small>Slack · Wiki · Salesforce · Google Doc</small></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="note">
+    <b>读图说明:</b>整张图是一座"数据赋能金字塔"——底部是分散的数据源,自下而上经过<b>打通(KR1/KR2)→ 结构化(KR3 本体+能力图谱)→ 计算(KR4 掌握度)→ 产品化(KR5/KR6/KR7)</b>,最终在顶部为三类对象创造价值。层级顺序同时也是建设与依赖顺序:先有底座,才能往上长。
+    <div class="legend">
+      <span class="lg"><span class="sw" style="background:var(--base)"></span>数据地基</span>
+      <span class="lg"><span class="sw" style="background:var(--bone)"></span>结构骨架</span>
+      <span class="lg"><span class="sw" style="background:var(--calc)"></span>能力计算</span>
+      <span class="lg"><span class="sw" style="background:var(--appC)"></span>C 端应用</span>
+      <span class="lg"><span class="sw" style="background:var(--appB)"></span>B 端应用</span>
+      <span class="lg"><span class="sw" style="background:var(--appP)"></span>数据产品</span>
+    </div>
+    <b>与其他 OKR 接口:</b>O7(CSRS 知识库+记忆)是数据底座与信号源(KR3 协同、KR4 取记忆信号);O3 的 Prove 过程性评价是产品出口(KR5/KR6 供其呈现);O2 增长引擎消费企业对标洞察(KR6)。
+  </footer>
+</div>
+
+<script>
+(function(){
+  var tip=document.createElement('div');
+  tip.className='floatTip'; tip.setAttribute('role','tooltip');
+  document.body.appendChild(tip);
+  var cur=null;
+  function show(el){
+    var raw=el.getAttribute('data-tip'); if(!raw) return;
+    var title=el.getAttribute('data-title')||'';
+    var html=title?'<div class="tt-title">'+title+'</div>':'';
+    html+='<ul>';
+    raw.split('|').forEach(function(p){
+      p=p.trim(); if(!p) return;
+      if(p.indexOf('度量')===0) return;
+      var cls=(p.indexOf('负责人')===0)?' class="tt-src first"':'';
+      html+='<li'+cls+'>'+p+'</li>';
+    });
+    html+='</ul>'; tip.innerHTML=html; tip.style.opacity='1'; cur=el;
+  }
+  function place(x,y){
+    var w=tip.offsetWidth,h=tip.offsetHeight,vw=window.innerWidth,vh=window.innerHeight;
+    var left=x+16,top=y+16;
+    if(left+w+12>vw) left=x-w-16;
+    if(top+h+12>vh) top=y-h-16;
+    if(left<8)left=8; if(top<8)top=8;
+    tip.style.left=left+'px'; tip.style.top=top+'px';
+  }
+  function hide(){tip.style.opacity='0'; cur=null;}
+  document.querySelectorAll('[data-tip]').forEach(function(el){
+    el.setAttribute('tabindex','0');
+    el.addEventListener('mouseenter',function(e){show(el);place(e.clientX,e.clientY);});
+    el.addEventListener('mousemove',function(e){if(cur)place(e.clientX,e.clientY);});
+    el.addEventListener('mouseleave',hide);
+    el.addEventListener('focus',function(){show(el);var r=el.getBoundingClientRect();place(r.left+r.width/2,r.bottom);});
+    el.addEventListener('blur',hide);
+  });
+})();
+</script>
